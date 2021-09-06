@@ -42,13 +42,34 @@ public class DataHelper {
     }
 
     public static String generateYearForCard(){
-        return "22";
+        String [] years = {"22", "23", "24", "25", "26"};
+        int randomIndex = new Random().nextInt(years.length);
+        String yearForCard = years[randomIndex];
+        return yearForCard;
     }
 
     public static String generateCvvCode(){
         Faker faker = new Faker();
         String cvv = faker.numerify("###");
         return cvv;
+    }
+
+    public static String generateIncorrectCardNumber(){
+        Faker faker = new Faker();
+        String incorrectCardNumber = faker.numerify("##############");
+        return incorrectCardNumber;
+    }
+
+    public static String generateIncorrectCardCvv(){
+        Faker faker = new Faker();
+        String incorrectCardCvv= faker.numerify("##");
+        return incorrectCardCvv;
+    }
+
+    public static String generateLetter(){
+        Faker faker = new Faker();
+        String letter = faker.letterify("#");
+        return letter;
     }
 
 }

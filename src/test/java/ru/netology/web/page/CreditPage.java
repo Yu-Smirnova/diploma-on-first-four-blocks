@@ -2,12 +2,14 @@ package ru.netology.web.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import lombok.Value;
 import ru.netology.web.data.DataHelper;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
+@Value
 public class CreditPage {
     private SelenideElement pageName = $(byText("Кредит по данным карты"));
     private SelenideElement cardNumber = $x("//span[text()='Номер карты']/following::span[1]/input");
@@ -16,6 +18,13 @@ public class CreditPage {
     private SelenideElement cardOwnerFullName = $x("//span[text()='Владелец']/following::span[1]/input");
     private SelenideElement cardCvv = $x("//span[text()='CVC/CVV']/following::span[1]/input");
     private SelenideElement continueButton =$(byText("Продолжить"));
+    private SelenideElement cardNumberError = $x("//span[text()='Номер карты']/following::span[text()='Неверный формат']");
+    private SelenideElement cardMonthValidityError = $x("//span[text()='Месяц']/following::span[text()='Неверно указан срок действия карты']");
+    private SelenideElement cardMonthError = $x("//span[text()='Месяц']/following::span[text()='Неверный формат']");
+    private SelenideElement cardYearValidityError = $x("//span[text()='Год']/following::span[text()='Истёк срок действия карты']");
+    private SelenideElement cardYearError = $x("//span[text()='Год']/following::span[text()='Неверный формат']");
+    private SelenideElement cardOwnerFullNameEmptyError = $x("//span[text()='Владелец']/following::span[text()='Поле обязательно для заполнения']");
+    private SelenideElement cardCvvError = $x("//span[text()='CVC/CVV']/following::span[text()='Неверный формат']");
 
     public CreditPage(){
         pageName.shouldBe(Condition.visible);
@@ -40,4 +49,5 @@ public class CreditPage {
         continueButton.click();
         return new ErrorPage();
     }
+
 }
